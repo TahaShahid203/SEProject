@@ -2,16 +2,19 @@
 
 import { adminDb } from "@/firebase-admin";
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
 
 export async function createNewDocument() {
-    auth.protect();
 
     const {sessionClaims} = await auth();
-    console.log("1");
+    
+    if (!sessionClaims) {
+        redirect("https://immense-caiman-80.accounts.dev/sign-in");
+    }
 
     const docCollectionRef = await adminDb.collection("documents");
 
-    console.log("2");
     const docRef = await docCollectionRef.add({
         title: "New Doc",
     });
