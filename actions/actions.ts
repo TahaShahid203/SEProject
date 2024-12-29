@@ -4,13 +4,14 @@ import { adminDb } from "@/firebase-admin";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
+const protectedActionsRedirectUrl = "https://immense-caiman-80.accounts.dev/sign-in"
 
 export async function createNewDocument() {
 
     const {sessionClaims} = await auth();
     
     if (!sessionClaims) {
-        redirect("https://immense-caiman-80.accounts.dev/sign-in");
+        redirect(protectedActionsRedirectUrl);
     }
 
     const docCollectionRef = await adminDb.collection("documents");
