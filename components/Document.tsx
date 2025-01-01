@@ -8,7 +8,7 @@ import { db } from "@/firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 
 const Document = ({ id }: { id: string }) => {
-  const [data, loading, error] = useDocumentData(doc(db, "documents", id));
+  const [data] = useDocumentData(doc(db, "documents", id));
   const [input, setInput] = useState("");
   const [updating, startTransition] = useTransition();
   useEffect(() => {
