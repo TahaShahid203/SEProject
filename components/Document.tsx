@@ -10,6 +10,7 @@ import Editor from "./Editor";
 import useOwner from "@/lib/isOwner";
 import DeleteDocument from "./DeleteDocument";
 import InviteUser from "./InviteUser";
+import ManageUsers from "./ManageUsers";
 
 const Document = ({ id }: { id: string }) => {
   const isOwner = useOwner();
@@ -49,7 +50,7 @@ const Document = ({ id }: { id: string }) => {
           </Button>
           {/* if isOwner Then Invite User, Delete Document */}
           {isOwner && (
-            // Invite User
+            
             <>
               <InviteUser />
               <DeleteDocument />
@@ -57,7 +58,8 @@ const Document = ({ id }: { id: string }) => {
           )}
         </form>
       </div>
-      <div>
+      <div className="flex max-w-6xl mx-auto justify-between items-center mb-5">
+        <ManageUsers />
         {/* manage users */}
         {/* avatars */}
       </div>

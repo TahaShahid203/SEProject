@@ -70,11 +70,11 @@ export async function inviteUserToDocument(roomId: string, email:string)
     if (!sessionClaims) {
         redirect(protectedActionsRedirectUrl);
     }
-
     
-
+    
+    
     try {
-       
+        
         await adminDb.collection("users").doc(email).collection("rooms").doc(roomId).set({
             userId: email,
             role: "editor",
@@ -82,6 +82,23 @@ export async function inviteUserToDocument(roomId: string, email:string)
             roomId: roomId,
         });
     
+        return {success: true};
+    } catch (error) {
+        console.log(error);
+        return {success: false};
+    }
+}
+
+export async function removeUserFromDocument(roomId: string, userId: string) {
+    
+    const {sessionClaims} = await auth();
+    
+    if (!sessionClaims) {
+        redirect(protectedActionsRedirectUrl);
+    }
+
+    try {
+        await adminDb.collection("users").doc(userId).collection("rooms").doc(roomId).delete();
         return {success: true};
     } catch (error) {
         console.log(error);
