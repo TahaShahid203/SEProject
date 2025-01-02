@@ -7,8 +7,11 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useDocumentData } from "react-firebase-hooks/firestore";
 import Editor from "./Editor";
+import useOwner from "@/lib/isOwner";
+import DeleteDocument from "./DeleteDocument";
 
 const Document = ({ id }: { id: string }) => {
+  const isOwner = useOwner();
   const [data] = useDocumentData(doc(db, "documents", id));
   const [input, setInput] = useState("");
   const [updating, startTransition] = useTransition();
@@ -30,7 +33,7 @@ const Document = ({ id }: { id: string }) => {
     }
   };
   return (
-    <div>
+    <div className="flex-1 h-full bg-white p-5">
       <div className="flex max-w-6xl mx-auto justify-between pb-5">
         {/* update the title */}
         <form onSubmit={handleUpdate} className="flex flex-1 space-x-2">
@@ -43,9 +46,14 @@ const Document = ({ id }: { id: string }) => {
           <Button type="submit" disabled={updating}>
             {updating ? "Updating..." : "Update"}
           </Button>
+        {/* if isOwner Then Invite User, Delete Document */}
+        {isOwner && (
+          // Invite User
+          // Delete Document
+          <DeleteDocument />
+        )}
         </form>
 
-        {/* if isOwner Then Invite User, Delete Document */}
       </div>
       <div>
         {/* manage users */}
