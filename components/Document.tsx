@@ -9,6 +9,7 @@ import { useDocumentData } from "react-firebase-hooks/firestore";
 import Editor from "./Editor";
 import useOwner from "@/lib/isOwner";
 import DeleteDocument from "./DeleteDocument";
+import InviteUser from "./InviteUser";
 
 const Document = ({ id }: { id: string }) => {
   const isOwner = useOwner();
@@ -46,14 +47,15 @@ const Document = ({ id }: { id: string }) => {
           <Button type="submit" disabled={updating}>
             {updating ? "Updating..." : "Update"}
           </Button>
-        {/* if isOwner Then Invite User, Delete Document */}
-        {isOwner && (
-          // Invite User
-          // Delete Document
-          <DeleteDocument />
-        )}
+          {/* if isOwner Then Invite User, Delete Document */}
+          {isOwner && (
+            // Invite User
+            <>
+              <InviteUser />
+              <DeleteDocument />
+            </>
+          )}
         </form>
-
       </div>
       <div>
         {/* manage users */}
