@@ -23,8 +23,8 @@ const BlockNote = ({ doc, provider, darkMode }: BlockNoteProps) => {
       provider,
       fragment: doc.getXmlFragment("document-store"),
       user: {
-        name: userInfo?.name!,
-        color: stringToColor(userInfo?.email!),
+        name: userInfo!.name!,
+        color: stringToColor(userInfo!.email!),
       },
     },
   });

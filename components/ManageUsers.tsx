@@ -7,12 +7,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { FormEvent, useState, useTransition } from "react";
+import { useState, useTransition } from "react";
 import { Button } from "./ui/button";
-import { usePathname } from "next/navigation";
 import { toast } from "sonner";
-import { Input } from "./ui/input";
-import { inviteUserToDocument, removeUserFromDocument } from "@/actions/actions";
+import { removeUserFromDocument } from "@/actions/actions";
 import { useUser } from "@clerk/nextjs";
 import { useRoom } from "@liveblocks/react";
 import useOwner from "@/lib/isOwner";
